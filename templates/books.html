@@ -1,0 +1,83 @@
+{% extends "layout.html" %}
+
+{% block page_name %}
+	{{ details[1] }}
+{% endblock %}
+
+{% block menu_options %}
+		<form class="nav-item form-inline my-2 my-lg-0 text-monospace" action="{{url_for('logout')}}" method="post">
+			<h6 style="color: white; padding-top: 8px; padding-right: 10px">{{fullname}}</h6>
+			<input type="hidden" name="username" value="{{username}}">
+			<button class="btn btn-outline-success btn-sm my-2 my-sm-0" type="Submit">
+				<i class="fas fa-sign-out-alt">Logout</i>
+			</button>
+		</form>
+{% endblock %}
+
+{% block body %}
+	<div class="container-fluid">
+		<div class="row no-gutters" style="margin: 10px;">
+			<div class="col" style="padding-top: 30px">
+				<div class="container-fluid">
+						<div class="row no-gutters" style="border:none; background:white;">
+							<div class="col-xs-4">
+								<img class="custom-error-book" src="http://covers.openlibrary.org/b/isbn/{{details[0]}}-L.jpg" style="margin:10px; border-radius: 5px" />
+							</div>
+							<div class="col-xs-6 text-monospace link_no_underline"> 
+								<h3 style="margin-top: 35px">{{details[1]}}</h3>
+								<p>by <b>{{details[2]}}</b></p>
+								<p>ISBN : {{details[0]}}</p>
+								<p>Published on {{details[3]}}</p>
+								<p>Ratings count(<a href="https://www.goodreads.com/" style="text-decoration: none">Goodreads</a>) : {{details[4]}}</p>
+								<p>Average Score(<a href="https://www.goodreads.com/" style="text-decoration: none">Goodreads</a>) : {{details[5]}}</p>
+							</div>
+						</div>
+						<h3 class="text-monospace" style="margin-top: 12%">REVIEWS</h3>
+						<hr>
+						{% if reviews == [] %}
+							<h5 class="text-monospace">There are no reviews for this book!</h5>
+						{% else %}
+							{% for review in reviews %}
+								<div style="display: inline-block;">
+									<h5 class="text-monospace"><b>{{review[1]}}</b> 
+										<small>rated it</small> 
+										<b style="color: #FFD700;text-shadow: 1px 1px #000000;">{{"★"*review[0]}}</b>
+										<b style="color: #4d4d4d; margin-left: -10px;text-shadow: 1px 1px #000000;">{{"★"*(5-review[0])}}</b>
+									</h5>
+								</div>
+								<p class="text-monospace">{{review[2]}}</p>
+								<hr>
+							{% endfor %}
+						{% endif %}
+				</div>
+			</div>
+			<div class="col text-monospace" style="margin: 10px; padding-top: 50px;">
+				<h2 style="margin-left: 10%">Write a review...</h2>
+				<form action="{{url_for('submit_review')}}" method="post" style="margin-left: 10%; padding: 10px; border-radius: 5px; background-color: #343a40">
+					<fieldset class="rating">
+					    <input type="radio" id="star5" name="rating" value="5"/>
+					    <label class = "full" for="star5" title="5 stars"></label>
+					    <input type="radio" id="star4" name="rating" value="4" />
+					    <label class = "full" for="star4" title="4 stars"></label>
+					    <input type="radio" id="star3" name="rating" value="3" />
+					    <label class = "full" for="star3" title="3 stars"></label>
+					    <input type="radio" id="star2" name="rating" value="2" />
+					    <label class = "full" for="star2" title="2 stars"></label>
+					    <input type="radio" id="star1" name="rating" value="1" />
+					    <label class = "full" for="star1" title="1 star"></label>
+					</fieldset>
+
+				  	<div class="form-group text-monospace">
+					  <textarea class="form-control z-depth-1" rows="3" name="description" placeholder="Write your review here..."></textarea>
+					</div>
+					<input type="hidden" name="username" value="{{username}}">
+					<input type="hidden" name="isbn" value="{{details[0]}}">
+				  	<button type="submit" class="btn btn-outline-success text-monospace" style="margin-top: 5px">Submit</button>
+				</form>
+				<a class="text-monospace" href="{{url_for('users',username=username)}}" style="text-decoration: none; margin-left: 10%;">
+					Go back to search page
+				</a>
+			</div>
+		</div>
+	</div>
+{% endblock %}

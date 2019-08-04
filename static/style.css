@@ -1,0 +1,74 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.content {
+  min-height: 92%;
+}
+
+footer .col-md-6{
+	padding: 10px;
+}
+
+.custom-error{
+	background-image: url("https://img.icons8.com/carbon-copy/2x/error.png");
+	height: 200px;
+	width: 200px;
+}
+
+.custom-error-book{
+	background-image: url("https://img.icons8.com/carbon-copy/2x/error.png");
+	height: 300px;
+	width: 300px;
+}
+
+.link_no_underline a{
+	text-decoration: none;
+}
+
+
+@media only screen and (max-width: 768px) {
+	.col-md-6 {
+    	display: inline-block;
+    	text-align: center;
+  	}
+
+	.icons a {
+	    display: inline-block;
+	}
+	.icons a i {
+	    vertical-align: middle;
+	    margin-right: -10px;
+	}
+}
+
+
+.rating { 
+  border: none;
+  float: left;
+}
+
+.rating > input { display: none; } 
+.rating > label:before { 
+  margin: 5px;
+  font-size: 1.25em;
+  display: inline-block;
+  content: "★"
+}
+
+.rating > label { 
+  color: #ddd; 
+ float: right; 
+}
+
+/***** CSS Magic to Highlight Stars on Hover *****/
+
+.rating > input:checked ~ label, /* show gold star when clicked */
+.rating:not(:checked) > label:hover, /* hover current star */
+.rating:not(:checked) > label:hover ~ label { color: #FFD700;  } /* hover previous stars in list */
+
+.rating > input:checked + label:hover, /* hover current star when changing rating */
+.rating > input:checked ~ label:hover,
+.rating > label:hover ~ input:checked ~ label, /* lighten current selection */
+.rating > input:checked ~ label:hover ~ label { color: #FFED85;  } 

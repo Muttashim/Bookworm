@@ -1,0 +1,76 @@
+{% extends "layout.html" %}
+
+
+{% block page_name %}
+	{{fullname}}
+{% endblock %}
+
+{% block menu_options %}
+		<form class="form-inline my-2 my-lg-0 text-monospace" action="{{url_for('logout')}}" method="post">
+			<h6 style="color: white; padding-top: 8px; padding-right: 10px">{{fullname}}</h6>
+			<input type="hidden" name="username" value="{{username}}">
+			<button class="btn btn-outline-success btn-sm my-2 my-sm-0" type="Submit">
+				<i class="fas fa-sign-out-alt">Logout</i>
+			</button>
+		</form>
+{% endblock %}
+
+{% block body %}
+	<div class="container-fluid">
+		<div class="row no-gutters" style="margin: 10px">
+			<div class="col" style="padding-top: 30px">
+				<h2 class="text-monospace"><b><i>Bookworm</i></b> helps you to search details about <b><i>5000 books</i></b>
+				   that are present on our database.
+					You can also read reviews by other users and write reviews on your own.</h2>
+					<h5 class="text-monospace">If you want to use our api make a get request to /api/&ltisbn&gt where isbn is the ISBN number of the book...</h5>
+				<img src="https://www.seekclipart.com/clipng/big/341-3411172_the-following-funny-bookworm-character-illustrations-cartoon-clipart.png" height="300" style="margin-left: 90px">
+				<p style="padding-left: 125px">Illustraion by <a target="_blank" href="https://www.seekclipart.com/">seekclipart</a></p>
+			</div>
+			<div class="col text-monospace" style="margin: 10px; padding-top: 50px;">
+				<h2 style="margin-left: 10%">Search BookWorm</h2>
+				<form action="{{url_for('search',page_no=1, user=username)}}" method="post" style="margin-left: 10%; background-color: #f2e9d0; padding: 10px; border-radius: 5px">
+					<div class="form-check form-check-inline" style="margin-top: 10px">
+					  <input class="form-check-input" type="radio" name="search_type" id="inlineRadio1" value="isbn" checked>
+					  <label class="form-check-label" for="inlineRadio1">ISBN</label>
+					</div>
+					<div class="form-check form-check-inline">
+					  <input class="form-check-input" type="radio" name="search_type" id="inlineRadio2" value="title">
+					  <label class="form-check-label" for="inlineRadio2">Title</label>
+					</div>
+					<div class="form-check form-check-inline">
+					  <input class="form-check-input" type="radio" name="search_type" id="inlineRadio3" value="author">
+					  <label class="form-check-label" for="inlineRadio3">Author</label>
+					</div>
+					<div class="form-group" style="margin-top: 10px;width: 70%">
+				    	<input name="query" type="text" class="form-control" placeholder="Enter ISBN or title or author name" required>
+				  	</div>
+				  	Sort by:
+				  	<div class="form-check form-check-inline" style="margin-top: 5px">
+					  <input class="form-check-input" type="radio" name="sort_by" id="inlineRadio1" value="title" checked>
+					  <label class="form-check-label" for="inlineRadio1">Title</label>
+					</div>
+					<div class="form-check form-check-inline">
+					  <input class="form-check-input" type="radio" name="sort_by" id="inlineRadio2" value="author">
+					  <label class="form-check-label" for="inlineRadio2">Author</label>
+					</div>
+					<div class="form-check form-check-inline">
+					  <input class="form-check-input" type="radio" name="sort_by" id="inlineRadio3" value="year">
+					  <label class="form-check-label" for="inlineRadio3">Year</label>
+					</div><br>
+					Sort order:
+				  	<div class="form-check form-check-inline" style="margin-top: 5px">
+					  <input class="form-check-input" type="radio" name="sort_order" id="inlineRadio1" value="asc" checked>
+					  <label class="form-check-label" for="inlineRadio1">asc</label>
+					</div>
+					<div class="form-check form-check-inline">
+					  <input class="form-check-input" type="radio" name="sort_order" id="inlineRadio2" value="desc">
+					  <label class="form-check-label" for="inlineRadio2">desc</label>
+					</div>
+					<br>
+					<input type="hidden" name="username" value="{{username}}">
+				  	<button type="submit" class="btn btn-outline-success text-monospace" style="margin-top: 5px">Search</button>
+				</form>
+			</div>
+		</div>
+	</div>
+{% endblock %}

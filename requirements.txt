@@ -1,0 +1,9 @@
+Flask
+Flask-Session
+
+psycopg2
+
+SQLAlchemy
+
+requests
+gunicorn

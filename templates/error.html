@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block page_name %}
+	Error
+{% endblock %}
+
+{% block menu_options %}
+	{% if username %}
+		<form class="form-inline my-2 my-lg-0 text-monospace" action="{{url_for('logout')}}" method="post">
+			<h6 style="color: white; padding-top: 8px; padding-right: 10px">{{session[username+'_fullname']}}</h6>
+			<input type="hidden" name="username" value="{{username}}">
+			<button class="btn btn-outline-success btn-sm my-2 my-sm-0" type="Submit">
+				<i class="fas fa-sign-out-alt">Logout</i>
+			</button>
+		</form>
+	{% endif %}
+{% endblock %}
+
+
+{% block body %}
+	<h1 class="text-monospace" style="margin-top: 4%;text-align: center">Something's wrong here...</h1>
+	<h4 class="text-monospace" style="margin-top: 8px;text-align: center">{{error_msg}}</h4>
+	<h6 class="text-monospace" style="margin-top: 8px;text-align: center"><a href="{{prev}}">Click here</a> to go back...</h6>
+	{% if err_type=="not_found" %}
+		<img src="{{img_url}}" height="450" style="margin-left: 30%; margin-top: 20px; margin-bottom: 10px">
+	{% else %}
+		<img src="{{img_url}}" height="470" style="margin-left: 40%; margin-top: 20px">
+	{% endif %}
+{% endblock %}

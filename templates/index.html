@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+
+
+{% block page_name %}
+	Login
+{% endblock %}
+
+{% block menu_options %}
+	    <form class="form-inline my-2 my-lg-0" action="{{url_for('login')}}" method="post">
+	      <input class="form-control form-control-sm mr-sm-2" type="text" placeholder="Username" name="username" required>
+	      <input class="form-control form-control-sm mr-sm-2" type="password" placeholder="Password" name="password" required>
+	      <button class="btn btn-outline-success btn-sm my-2 my-sm-0" type="submit">Login</button>
+	    </form>
+{% endblock %}
+
+{% block body %}
+	<div class="container-fluid">
+		<div class="row no-gutters" style="margin: 10px">
+			<div class="col" style="padding-top: 30px">
+				<h2 class="text-monospace"><b><i>Bookworm</i></b> helps you to search details about <b><i>5000 books</i></b>
+				   that are present on our database.
+					You can also read reviews by other users and write reviews on your own.</h2>
+					<h5 class="text-monospace">If you want to use our api make a get request to /api/&ltisbn&gt where isbn is the ISBN number of the book...</h5>
+				<img src="https://www.seekclipart.com/clipng/big/341-3411172_the-following-funny-bookworm-character-illustrations-cartoon-clipart.png" height="300" style="margin-left: 90px">
+				<p style="padding-left: 125px">Illustraion by <a target="_blank" href="https://www.seekclipart.com/">seekclipart</a></p>
+			</div>
+			<div class="col" style="margin: 10px; padding-left: 20px">
+				<h1 class="text-monospace" style="padding-top: 30px">Create an account</h1>
+				<h5 class="text-monospace">It's free and it always will be.</h5>
+
+				<form action="{{ url_for('register')}}" method="post">
+				  <div class="form-group text-monospace">
+				    <input name="username" type="text" class="form-control" placeholder="Username" required>
+				  </div>
+				  <div class="form-group">
+				    <input name="fullname" type="text" class="form-control" placeholder="Fullname" required>
+				  </div>
+				  <div class="form-group">
+				    <input name="password" type="password" class="form-control" placeholder="Password" required>
+				  </div>
+				  <p  class="form-text text-muted text-monospace">We'll never share your details with anyone else.</p>
+				  <button type="submit" class="btn btn-primary text-monospace">Submit</button>
+				</form>
+			</div>
+		</div>
+	</div>
+{% endblock %}
